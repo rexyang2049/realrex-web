@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RealRex Research Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --ink:#0d1a0d;--ink-mid:#2e4a2e;--ink-light:#4d6b4d;--ink-faint:#7a967a;
+      --green:#1e8a1e;--green-mid:#2d9e2d;
+      --green-bg:rgba(30,138,30,0.07);--green-bd:rgba(30,138,30,0.22);
+      --surface:#f7fbf7;--border:#d6e8d6;
+    }
+    body{font-family:'Space Grotesk',sans-serif;background:#fff;color:var(--ink);width:100%;}
+
+    /* NAV */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:15px 40px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+    .nav-logo{display:flex;align-items:center;gap:10px;cursor:default;}
+    .logo-mark{position:relative;width:32px;height:32px;flex-shrink:0;}
+    .logo-sq-outer{position:absolute;inset:0;border-radius:7px;background:#0d1a0d;border:1px solid rgba(30,138,30,0.5);}
+    .logo-sq-inner{position:absolute;inset:5px;border-radius:3px;background:rgba(30,138,30,0.2);border:1px solid rgba(30,138,30,0.45);}
+    .logo-rr{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3dba3d;letter-spacing:-0.03em;}
+    .logo-text-top{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:0.01em;line-height:1;}
+    .logo-text-top span{color:var(--green);}
+    .logo-text-bot{font-size:8px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);line-height:1;margin-top:2px;}
+    .nav-links{display:flex;gap:24px;list-style:none;}
+    .nav-links a{font-size:13px;color:var(--ink-mid);text-decoration:none;font-weight:600;transition:color 0.15s;}
+    .nav-links a:hover{color:var(--ink);}
+    .nav-cta{background:var(--ink);color:#f5faf5;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:8px 18px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;}
+
+    /* HERO */
+    .hero-canvas{position:relative;overflow:hidden;background:#fff;border-bottom:1px solid var(--border);}
+    .orb{position:absolute;border-radius:50%;pointer-events:none;}
+    .orb-1{width:400px;height:400px;top:-140px;right:-100px;background:radial-gradient(circle,rgba(30,138,30,0.07) 0%,transparent 70%);animation:drift1 9s ease-in-out infinite;}
+    .orb-2{width:240px;height:240px;top:100px;right:20px;background:radial-gradient(circle,rgba(30,138,30,0.05) 0%,transparent 70%);animation:drift2 12s ease-in-out infinite;}
+    .orb-3{width:140px;height:140px;top:40px;right:220px;background:radial-gradient(circle,rgba(30,138,30,0.06) 0%,transparent 70%);animation:drift3 7s ease-in-out infinite;}
+    @keyframes drift1{0%,100%{transform:translate(0,0);}50%{transform:translate(-14px,20px);}}
+    @keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(10px,-16px);}}
+    @keyframes drift3{0%,100%{transform:translate(0,0);}50%{transform:translate(-8px,12px);}}
+
+    .hero{padding:64px 40px 56px;position:relative;z-index:2;max-width:860px;}
+
+    .wm-main{font-family:'Instrument Serif',serif;font-size:52px;font-weight:400;line-height:1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:0;}
+    .wm-main em{font-style:italic;color:var(--green);}
+    .wm-rule{display:block;width:100%;height:1px;background:linear-gradient(90deg,rgba(30,138,30,0.3),transparent);margin:10px 0 7px;}
+    .wm-sub{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:22px;}
+
+    .tl-top{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;line-height:1.35;color:var(--ink);margin-bottom:8px;}
+    .tl-top em{font-style:italic;color:var(--green);}
+    .tl-bot{font-size:14px;font-weight:500;color:var(--ink-light);line-height:1.65;max-width:540px;margin-bottom:32px;}
+
+    /* ABOUT */
+    .about-block{margin-bottom:36px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start;max-width:680px;}
+    .about-avatar{width:48px;height:48px;border-radius:11px;flex-shrink:0;background:#0d1a0d;border:1px solid rgba(30,138,30,0.4);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:20px;font-style:italic;color:#3dba3d;}
+    .about-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+    .about-title{font-size:12px;color:var(--green);font-weight:600;letter-spacing:0.03em;margin-bottom:10px;}
+    .about-desc{font-size:13px;color:var(--ink-light);line-height:1.65;}
+    .about-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+    .about-tag{font-size:11px;font-weight:600;padding:4px 11px;border-radius:100px;background:#fff;border:1px solid var(--border);color:var(--ink-mid);}
+
+    /* PORTALS */
+    .portal-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:680px;}
+    .portal{border-radius:16px;padding:22px 20px;text-decoration:none;display:block;position:relative;overflow:hidden;transition:transform 0.2s;cursor:pointer;}
+    .portal:hover{transform:translateY(-4px);}
+    .portal-a{background:#0d1a0d;border:1px solid rgba(30,138,30,0.35);}
+    .portal-b{background:var(--surface);border:1px solid var(--border);}
+    .portal-glow-a{position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(30,138,30,0.2) 0%,transparent 70%);pointer-events:none;}
+    .portal-glow-b{position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(30,138,30,0.1) 0%,transparent 70%);pointer-events:none;}
+    .portal-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px;}
+    .portal-a .portal-icon{background:rgba(30,138,30,0.18);border:1px solid rgba(30,138,30,0.3);}
+    .portal-b .portal-icon{background:var(--green-bg);border:1px solid var(--green-bd);}
+    .portal-title{font-size:15px;font-weight:700;letter-spacing:-0.01em;margin-bottom:6px;}
+    .portal-a .portal-title{color:#f5faf5;}
+    .portal-b .portal-title{color:var(--ink);}
+    .portal-desc{font-size:12px;font-weight:500;line-height:1.6;}
+    .portal-a .portal-desc{color:#a0c8a0;}
+    .portal-b .portal-desc{color:var(--ink-light);}
+    .portal-arr{position:absolute;top:18px;right:18px;font-size:16px;transition:transform 0.2s;}
+    .portal-a .portal-arr{color:rgba(61,186,61,0.6);}
+    .portal-b .portal-arr{color:var(--green-mid);}
+    .portal:hover .portal-arr{transform:translate(3px,-3px);}
+    .portal-soon{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-top:12px;}
+    .portal-a .portal-soon{background:rgba(30,138,30,0.15);color:#7acc7a;border:1px solid rgba(30,138,30,0.25);}
+    .portal-b .portal-soon{background:var(--green-bg);color:var(--ink-mid);border:1px solid var(--green-bd);}
+
+    /* MISSION */
+    .section{padding:48px 40px;border-top:1px solid var(--border);}
+    .sec-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:22px;}
+    .mission-grid{display:flex;flex-direction:column;gap:12px;max-width:680px;}
+    .mission-card{display:flex;align-items:flex-start;gap:18px;padding:18px 20px;border-radius:13px;background:var(--surface);border:1px solid var(--border);}
+    .mission-num{font-family:'Instrument Serif',serif;font-size:26px;color:rgba(30,138,30,0.3);line-height:1;flex-shrink:0;min-width:24px;}
+    .mission-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px;line-height:1.3;}
+    .mission-desc{font-size:13px;color:var(--ink-light);line-height:1.6;}
+
+    /* SUB */
+    .sub-bar{display:flex;align-items:center;gap:12px;padding:22px 40px;background:var(--surface);border-top:1px solid var(--border);flex-wrap:wrap;}
+    .sub-label{font-size:13px;font-weight:600;color:var(--ink-mid);flex:1;}
+    .sub-input{font-family:'Space Grotesk',sans-serif;font-size:13px;background:#fff;border:1px solid var(--border);padding:10px 16px;border-radius:100px;color:var(--ink);width:200px;outline:none;}
+    .sub-input::placeholder{color:var(--ink-faint);}
+    .sub-btn{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.07em;background:var(--ink);color:#f5faf5;border:none;padding:11px 20px;border-radius:100px;cursor:pointer;}
+
+    @media(max-width:600px){
+      .nav{padding:14px 20px;}
+      .nav-links{display:none;}
+      .hero{padding:40px 20px 36px;}
+      .wm-main{font-size:36px;}
+      .portal-row{grid-template-columns:1fr;}
+      .section{padding:36px 20px;}
+      .sub-bar{padding:18px 20px;}
+      .about-block{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="logo-mark">
+        <div class="logo-sq-outer"></div>
+        <div class="logo-sq-inner"></div>
+        <div class="logo-rr">RR</div>
+      </div>
+      <div>
+        <div class="logo-text-top">RealRex <span>Research</span> Lab</div>
+        <div class="logo-text-bot">Web3 · Independent Research</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Weekly</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="mailto:rex@realrex.club" class="nav-cta">Contact ↗</a>
+  </nav>
+
+  <div class="hero-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero">
+      <div class="wm-main">RealRex <em>Research</em> Lab</div>
+      <span class="wm-rule"></span>
+      <span class="wm-sub">Deciphering Web3 Ecosystems through Data &amp; Logic</span>
+
+      <div class="tl-top">Deep-dives into <em>protocol architecture</em><br>and <em>market dynamics.</em></div>
+      <div class="tl-bot">Bridging first-principles research with actionable Web3 insights.</div>
+
+      <div class="about-block">
+        <div class="about-avatar">R</div>
+        <div style="flex:1">
+          <div class="about-name">RealRex</div>
+          <div class="about-title">Web3 Researcher · New York</div>
+          <div class="about-desc">Student at Weill Cornell Medicine with a deep interest in crypto ecosystems. I approach Web3 from a research-first perspective — combining on-chain data, protocol mechanics, and market logic to produce independent, unsponsored analysis.</div>
+          <div class="about-tags">
+            <span class="about-tag">Weill Cornell Medicine</span>
+            <span class="about-tag">New York</span>
+            <span class="about-tag">Web3 Research</span>
+            <span class="about-tag">On-chain Data</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-row">
+        <a href="#" class="portal portal-a">
+          <div class="portal-glow-a"></div>
+          <span class="portal-arr">↗</span>
+          <div class="portal-icon">📅</div>
+          <div class="portal-title">Weekly Reports</div>
+          <div class="portal-desc">Market pulse, protocol updates, and data drops every Monday.</div>
+          <div class="portal-soon">Coming soon</div>
+        </a>
+        <a href="#" class="portal portal-b">
+          <div class="portal-glow-b"></div>
+          <span class="portal-arr">↗</span>
+          <div class="portal-icon">🔬</div>
+          <div class="portal-title">Deep Research</div>
+          <div class="portal-desc">Long-form protocol analysis, tokenomics, data-driven narratives.</div>
+          <div class="portal-soon">Coming soon</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <span class="sec-label">What I'm Building Towards</span>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-num">1</div>
+        <div>
+          <div class="mission-title">Investor-grade project evaluation</div>
+          <div class="mission-desc">Explore projects from an investor's lens — assessing short, mid, and long-term prospects through tokenomics, team signals, competitive moats, and on-chain traction.</div>
+        </div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-num">2</div>
+        <div>
+          <div class="mission-title">Decoding protocol complexity</div>
+          <div class="mission-desc">Break down intricate protocol architectures, incentive mechanisms, and governance structures into clear, structured analysis accessible to both builders and allocators.</div>
+        </div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-num">3</div>
+        <div>
+          <div class="mission-title">Narrative vs. reality checks</div>
+          <div class="mission-desc">Stress-test prevailing Web3 narratives against on-chain data — separating genuine adoption signals from hype cycles using first-principles reasoning.</div>
+        </div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-num">4</div>
+        <div>
+          <div class="mission-title">Cross-domain synthesis</div>
+          <div class="mission-desc">Bridge insights from macroeconomics, traditional finance, and systems biology to crypto — bringing a uniquely multidisciplinary lens to Web3 research.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sub-bar">
+    <span class="sub-label">⚡ Updates coming soon — be the first to know</span>
+    <input class="sub-input" type="email" placeholder="your@email.com" />
+    <button class="sub-btn">Notify me ↗</button>
+  </div>
+
+</body>
+</html>
